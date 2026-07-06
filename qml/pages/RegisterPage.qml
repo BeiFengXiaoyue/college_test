@@ -298,9 +298,9 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: Qt.callLater(function() {
-                        mainLoader.setSource("pages/LoginPage.qml")
-                    })
+                    onClicked: {
+                        appWindow.navigateTo("qrc:/qml/pages/LoginPage.qml")
+                    }
                 }
             }
         }
@@ -329,7 +329,7 @@ Page {
             registerBtn.enabled = true
             registerBtn.text = "返回登录"
             registerBtn.onClicked = function() {
-                mainLoader.setSource("pages/LoginPage.qml")
+                appWindow.navigateTo("qrc:/qml/pages/LoginPage.qml")
             }
         }
     }

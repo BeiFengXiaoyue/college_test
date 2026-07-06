@@ -22,35 +22,45 @@ ApplicationWindow {
     readonly property bool isLoggedIn: AuthService.loggedIn
     readonly property bool isTeacher: AuthService.isTeacher
 
-    // 当前页面栈
-    property var pageStack: []
+    // 导航请求：子页面通过设置此属性来切换页面
+    // 通过属性绑定 + Qt.callLater 延迟执行，避免在页面事件中销毁自身
+    property string requestedPage: ""
+    property var requestedPageProps: ({})
 
-    // 导航到指定页面
-    function navigateTo(page, properties) {
-        mainLoader.setSource(page, properties || {})
+    onRequestedPageChanged: {
+        if (requestedPage.length > 0) {
+            var page = requestedPage
+            var props = requestedPageProps
+            requestedPage = ""
+            requestedPageProps = ({})
+            Qt.callLater(function() {
+                mainLoader.setSource(page, props)
+            })
+        }
+    }
+
+    // 导航辅助函数（供 QML 页面调用）
+    function navigateTo(page, props) {
+        requestedPageProps = props || ({})
+        requestedPage = page
     }
 
     // 初始化
     Component.onCompleted: {
-        if (isLoggedIn) {
-            navigateTo("pages/DashboardPage.qml")
-        } else {
-            navigateTo("pages/LoginPage.qml")
-        }
+        navigateTo("qrc:/qml/pages/LoginPage.qml")
     }
 
-    // 监听登录状态变化（注册成功后由 ProcessManager 负责重启，不在此处导航）
+    // 监听登录状态变化
     Connections {
         target: AuthService
         function onLoginStateChanged() {
             if (ProcessManager.isRestarting) {
-                // 即将重启新进程，不做页面切换，避免中断后空白
                 return
             }
             if (AuthService.loggedIn) {
-                navigateTo("pages/DashboardPage.qml")
+                navigateTo("qrc:/qml/pages/DashboardPage.qml")
             } else {
-                navigateTo("pages/LoginPage.qml")
+                navigateTo("qrc:/qml/pages/LoginPage.qml")
             }
         }
     }

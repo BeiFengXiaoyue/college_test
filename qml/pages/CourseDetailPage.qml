@@ -41,7 +41,7 @@ Page {
                 text: "← 返回"
                 flat: true
                 font.pixelSize: Theme.fontSizeMd
-                onClicked: mainLoader.setSource("pages/CourseListPage.qml")
+                onClicked: appWindow.navigateTo("qrc:/qml/pages/CourseListPage.qml")
             }
 
             Text {
@@ -221,13 +221,13 @@ Page {
                             }
                             onClicked: {
                                 if (modelData.type === "live") {
-                                    mainLoader.setSource("pages/LiveClassroomPage.qml", {
+                                    appWindow.navigateTo("qrc:/qml/pages/LiveClassroomPage.qml", {
                                         lessonId: modelData.id,
                                         lessonTitle: modelData.title,
                                         videoUrl: modelData.videoUrl
                                     })
                                 } else {
-                                    mainLoader.setSource("pages/PlaybackPage.qml", {
+                                    appWindow.navigateTo("qrc:/qml/pages/PlaybackPage.qml", {
                                         lessonId: modelData.id,
                                         lessonTitle: modelData.title,
                                         videoUrl: modelData.videoUrl

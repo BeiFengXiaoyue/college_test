@@ -35,7 +35,7 @@ Page {
                 text: "← 返回"
                 flat: true
                 font.pixelSize: Theme.fontSizeMd
-                onClicked: mainLoader.setSource("pages/CourseDetailPage.qml", {courseId: root.lessonId})
+                onClicked: appWindow.navigateTo("qrc:/qml/pages/CourseDetailPage.qml", {courseId: root.lessonId})
             }
 
             Text {
@@ -136,6 +136,6 @@ Page {
     // 功能快捷键
     Shortcut {
         sequence: "Escape"
-        onActivated: mainLoader.setSource("pages/CourseDetailPage.qml", {courseId: root.lessonId})
+        onActivated: appWindow.navigateTo("qrc:/qml/pages/CourseDetailPage.qml", {courseId: root.lessonId})
     }
 }

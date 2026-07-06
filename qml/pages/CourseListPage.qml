@@ -39,7 +39,7 @@ Page {
                 text: "← 返回"
                 flat: true
                 font.pixelSize: Theme.fontSizeMd
-                onClicked: mainLoader.setSource("pages/DashboardPage.qml")
+                onClicked: appWindow.navigateTo("qrc:/qml/pages/DashboardPage.qml")
             }
 
             Text {
@@ -113,7 +113,7 @@ Page {
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                onClicked: mainLoader.setSource("pages/CourseDetailPage.qml", {courseId: model.id})
+                onClicked: appWindow.navigateTo("qrc:/qml/pages/CourseDetailPage.qml", {courseId: model.id})
             }
 
             RowLayout {

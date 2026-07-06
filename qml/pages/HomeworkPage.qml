@@ -31,7 +31,7 @@ Page {
                 text: "← 返回"
                 flat: true
                 font.pixelSize: Theme.fontSizeMd
-                onClicked: mainLoader.setSource("pages/DashboardPage.qml")
+                onClicked: appWindow.navigateTo("qrc:/qml/pages/DashboardPage.qml")
             }
 
             Text {

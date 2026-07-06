@@ -121,7 +121,7 @@ Page {
                     icon: "📚"
                     title: "课程列表"
                     description: AuthService.isTeacher ? "管理您的课程" : "浏览所有课程"
-                    onClicked: mainLoader.setSource("pages/CourseListPage.qml")
+                    onClicked: appWindow.navigateTo("qrc:/qml/pages/CourseListPage.qml")
                 }
 
                 // 直播
@@ -131,7 +131,7 @@ Page {
                     icon: "📺"
                     title: "直播课堂"
                     description: "参加正在进行的直播课程"
-                    onClicked: mainLoader.setSource("pages/CourseListPage.qml", {filter: "live"})
+                    onClicked: appWindow.navigateTo("qrc:/qml/pages/CourseListPage.qml", {filter: "live"})
                 }
 
                 // 作业
@@ -141,7 +141,7 @@ Page {
                     icon: "📝"
                     title: "在线作业"
                     description: AuthService.isTeacher ? "布置与批改作业" : "提价与查看作业"
-                    onClicked: mainLoader.setSource("pages/HomeworkPage.qml")
+                    onClicked: appWindow.navigateTo("qrc:/qml/pages/HomeworkPage.qml")
                 }
 
                 // 学习记录
