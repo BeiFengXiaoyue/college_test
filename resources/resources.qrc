@@ -15,6 +15,7 @@
         <file alias="qml/pages/LiveClassroomPage.qml">../qml/pages/LiveClassroomPage.qml</file>
         <file alias="qml/pages/PlaybackPage.qml">../qml/pages/PlaybackPage.qml</file>
         <file alias="qml/pages/HomeworkPage.qml">../qml/pages/HomeworkPage.qml</file>
+        <file alias="qml/pages/RegisterPage.qml">../qml/pages/RegisterPage.qml</file>
         <file alias="resources/sql/init.sql">sql/init.sql</file>
     </qresource>
 </RCC>

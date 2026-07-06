@@ -171,8 +171,7 @@ Page {
                 font.pixelSize: Theme.fontSizeSm
                 color: Theme.textSecondary
                 onLinkActivated: {
-                    // 切换到注册页面
-                    mainLoader.setSource("LoginPage.qml", {mode: "register"})
+                    mainLoader.setSource("pages/RegisterPage.qml")
                 }
             }
         }

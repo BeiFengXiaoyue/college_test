@@ -72,6 +72,7 @@ DISTFILES += \
     qml/pages/LiveClassroomPage.qml \
     qml/pages/PlaybackPage.qml \
     qml/pages/HomeworkPage.qml \
+    qml/pages/RegisterPage.qml \
     qml/theme/Theme.qml \
     qml/theme/qmldir \
     resources/sql/init.sql
