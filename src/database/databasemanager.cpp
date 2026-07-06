@@ -62,15 +62,20 @@ bool DatabaseManager::initializeSchema()
 {
     // 从资源文件加载 SQL 初始化脚本
     QString sqlPath = ":/resources/sql/init.sql";
-
-    // 也尝试从文件系统加载
     QFile file(sqlPath);
+
+    // 如果资源文件不存在，回退到文件系统路径
     if (!file.exists()) {
-        // 回退到相对路径
-        file.setFileName(QCoreApplication::applicationDirPath() + "/../resources/sql/init.sql");
+        sqlPath = QCoreApplication::applicationDirPath() + "/../resources/sql/init.sql";
+        qDebug() << "[DatabaseManager] SQL file not in resources, trying:" << sqlPath;
     }
 
-    return executeSqlFile(sqlPath);
+    bool ok = executeSqlFile(sqlPath);
+    if (!ok) {
+        qWarning() << "[DatabaseManager] Failed to initialize database schema!";
+        m_lastError = "无法加载数据库初始化脚本";
+    }
+    return ok;
 }
 
 QSqlDatabase &DatabaseManager::database()
@@ -102,6 +107,7 @@ bool DatabaseManager::executeSql(const QString &sql)
 {
     // 按分号分割多条语句
     QStringList statements = sql.split(';', Qt::SkipEmptyParts);
+    bool allOk = true;
 
     for (const QString &stmt : statements) {
         QString trimmed = stmt.trimmed();
@@ -113,10 +119,11 @@ bool DatabaseManager::executeSql(const QString &sql)
         if (!query.exec(trimmed)) {
             m_lastError = query.lastError().text();
             qWarning() << "[DatabaseManager] SQL error:" << m_lastError;
-            qWarning() << "[DatabaseManager] Statement:" << trimmed.left(100);
-            // 不中断，继续执行后续语句
+            qWarning() << "[DatabaseManager] Statement:" << trimmed.left(200);
+            allOk = false;
+            // 继续执行后续语句
         }
     }
 
-    return true;
+    return allOk;
 }
