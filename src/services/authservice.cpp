@@ -46,28 +46,24 @@ void AuthService::login(const QString &username, const QString &password)
 void AuthService::registerUser(const QString &username, const QString &password,
                                  const QString &displayName, const QString &role)
 {
-    QtConcurrent::run([this, username, password, displayName, role]() {
-        // 检查用户名是否已存在
-        if (m_userDao.usernameExists(username)) {
-            emit registerFailed("用户名已存在");
-            return;
-        }
+    // 同步注册 — 排除多线程信号传递问题
+    if (m_userDao.usernameExists(username)) {
+        emit registerFailed("用户名已存在");
+        return;
+    }
 
-        UserModel user;
-        user.username = username;
-        user.passwordHash = hashPassword(password);
-        user.displayName = displayName;
-        user.role = role;
+    UserModel user;
+    user.username = username;
+    user.passwordHash = hashPassword(password);
+    user.displayName = displayName;
+    user.role = role;
 
-        if (m_userDao.insertUser(user)) {
-            // 不发射 currentUserChanged/loginStateChanged — 注册成功后由
-            // ProcessManager 重启新进程，新进程以未登录状态启动显示登录页
-            emit registerSuccess(user.id);
-            qDebug() << "[AuthService] User registered:" << user.username;
-        } else {
-            emit registerFailed("注册失败，请稍后重试");
-        }
-    });
+    if (m_userDao.insertUser(user)) {
+        emit registerSuccess(user.id);
+        qDebug() << "[AuthService] User registered:" << user.username;
+    } else {
+        emit registerFailed("注册失败，请稍后重试");
+    }
 }
 
 void AuthService::logout()
