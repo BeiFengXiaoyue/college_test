@@ -273,13 +273,34 @@ Page {
             }
 
             // 返回登录链接
-            Text {
+            Item {
                 Layout.alignment: Qt.AlignHCenter
-                text: "已有账户？<a href='login'>立即登录</a>"
-                font.pixelSize: Theme.fontSizeSm
-                color: Theme.textSecondary
-                onLinkActivated: {
-                    mainLoader.setSource("pages/LoginPage.qml")
+                Layout.preferredHeight: loginLinkText.height + 4
+                Layout.fillWidth: true
+
+                Text {
+                    id: loginLinkText
+                    anchors.centerIn: parent
+                    text: "已有账户？"
+                    font.pixelSize: Theme.fontSizeSm
+                    color: Theme.textSecondary
+                }
+
+                Text {
+                    anchors.left: loginLinkText.right
+                    anchors.verticalCenter: loginLinkText.verticalCenter
+                    anchors.leftMargin: 2
+                    text: "立即登录"
+                    font.pixelSize: Theme.fontSizeSm
+                    color: Theme.primaryColor
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: Qt.callLater(function() {
+                        mainLoader.setSource("pages/LoginPage.qml")
+                    })
                 }
             }
         }

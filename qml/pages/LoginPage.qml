@@ -190,7 +190,9 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: mainLoader.setSource("pages/RegisterPage.qml")
+                    onClicked: Qt.callLater(function() {
+                        mainLoader.setSource("pages/RegisterPage.qml")
+                    })
                 }
             }
         }
