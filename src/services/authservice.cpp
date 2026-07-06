@@ -60,9 +60,8 @@ void AuthService::registerUser(const QString &username, const QString &password,
         user.role = role;
 
         if (m_userDao.insertUser(user)) {
-            m_currentUser = user;
-            emit currentUserChanged();
-            emit loginStateChanged();
+            // 不发射 currentUserChanged/loginStateChanged — 注册成功后由
+            // ProcessManager 重启新进程，新进程以未登录状态启动显示登录页
             emit registerSuccess(user.id);
             qDebug() << "[AuthService] User registered:" << user.username;
         } else {

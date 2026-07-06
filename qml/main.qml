@@ -39,10 +39,14 @@ ApplicationWindow {
         }
     }
 
-    // 监听登录状态变化
+    // 监听登录状态变化（注册成功后由 ProcessManager 负责重启，不在此处导航）
     Connections {
         target: AuthService
         function onLoginStateChanged() {
+            if (ProcessManager.isRestarting) {
+                // 即将重启新进程，不做页面切换，避免中断后空白
+                return
+            }
             if (AuthService.loggedIn) {
                 navigateTo("pages/DashboardPage.qml")
             } else {
