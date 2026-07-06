@@ -11,6 +11,7 @@ SOURCES += \
     src/core/appcore.cpp \
     src/core/threadpoolmanager.cpp \
     src/core/configmanager.cpp \
+    src/core/processmanager.cpp \
     src/database/databasemanager.cpp \
     src/database/userdao.cpp \
     src/database/coursedao.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     src/core/appcore.h \
     src/core/threadpoolmanager.h \
     src/core/configmanager.h \
+    src/core/processmanager.h \
     src/database/databasemanager.h \
     src/database/userdao.h \
     src/database/coursedao.h \

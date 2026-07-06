@@ -7,6 +7,7 @@
 
 #include "core/appcore.h"
 #include "core/threadpoolmanager.h"
+#include "core/processmanager.h"
 #include "services/authservice.h"
 #include "services/courseservice.h"
 #include "services/homeworkservice.h"
@@ -31,6 +32,19 @@ int main(int argc, char *argv[])
     HomeworkService homeworkService(appCore.databaseManager());
     LiveStreamService liveStreamService;
 
+    // 初始化进程管理器
+    ProcessManager processManager;
+
+    // ============================================================
+    // 信号与槽：注册成功后自动重启应用（新进程）
+    // ============================================================
+    // registerSuccess 在后台线程发射，使用 QueuedConnection 确保在主线程执行重启
+    QObject::connect(&authService, &AuthService::registerSuccess,
+        &processManager, [&processManager](int userId) {
+            Q_UNUSED(userId)
+            processManager.restartApplication();
+        }, Qt::QueuedConnection);
+
     // 初始化 QQmlApplicationEngine
     QQmlApplicationEngine engine;
 
@@ -42,6 +56,7 @@ int main(int argc, char *argv[])
     context->setContextProperty("CourseService", &courseService);
     context->setContextProperty("HomeworkService", &homeworkService);
     context->setContextProperty("LiveStreamService", &liveStreamService);
+    context->setContextProperty("ProcessManager", &processManager);
 
     // 注册可实例化的 C++ 类型到 QML
     qmlRegisterType<LiveStreamManager>("EduPlatform.Media", 1, 0, "LiveStreamManager");

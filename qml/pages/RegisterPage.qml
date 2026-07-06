@@ -285,13 +285,14 @@ Page {
         }
     }
 
-    // 注册结果处理
+    // 注册结果处理（进程重启由 C++ 信号-槽处理）
     Connections {
         target: AuthService
         function onRegisterSuccess(userId) {
-            registerBtn.enabled = true
-            registerBtn.text = "注 册"
-            // main.qml 的 onLoginStateChanged 会自动跳转到仪表盘
+            // 注册成功，C++ 端通过信号-槽自动启动新进程、关闭当前进程
+            registerBtn.enabled = false
+            registerBtn.text = "注册成功，正在启动..."
+            errorText.text = ""
         }
         function onRegisterFailed(error) {
             errorText.text = error
