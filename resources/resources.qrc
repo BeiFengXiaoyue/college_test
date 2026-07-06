@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/theme/Theme.qml</file>
+        <file>qml/components/Whiteboard.qml</file>
+        <file>qml/components/DanmakuOverlay.qml</file>
+        <file>qml/components/VideoPlayer.qml</file>
+        <file>qml/components/LiveStreamView.qml</file>
+        <file>qml/components/HomeworkSubmission.qml</file>
+        <file>qml/pages/LoginPage.qml</file>
+        <file>qml/pages/DashboardPage.qml</file>
+        <file>qml/pages/CourseListPage.qml</file>
+        <file>qml/pages/CourseDetailPage.qml</file>
+        <file>qml/pages/LiveClassroomPage.qml</file>
+        <file>qml/pages/PlaybackPage.qml</file>
+        <file>qml/pages/HomeworkPage.qml</file>
+    </qresource>
+</RCC>
