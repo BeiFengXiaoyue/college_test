@@ -79,10 +79,8 @@ void StreamRecorder::startRecording(QMediaCaptureSession *captureSession)
     format.setFileFormat(QMediaFormat::FileFormat::MPEG4);
     m_recorder->setMediaFormat(format);
 
-    QMediaEncoderSettings settings;
-    settings.setVideoResolution(1920, 1080);
-    settings.setVideoBitRate(2500000);
-    m_recorder->setEncoderSettings(settings);
+    m_recorder->setVideoResolution(QSize(1920, 1080));
+    m_recorder->setVideoBitRate(2500000);
 
     m_recorder->setOutputLocation(QUrl::fromLocalFile(fullPath));
     m_recorder->record();

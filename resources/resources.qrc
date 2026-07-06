@@ -1,18 +1,20 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/main.qml</file>
-        <file>qml/theme/Theme.qml</file>
-        <file>qml/components/Whiteboard.qml</file>
-        <file>qml/components/DanmakuOverlay.qml</file>
-        <file>qml/components/VideoPlayer.qml</file>
-        <file>qml/components/LiveStreamView.qml</file>
-        <file>qml/components/HomeworkSubmission.qml</file>
-        <file>qml/pages/LoginPage.qml</file>
-        <file>qml/pages/DashboardPage.qml</file>
-        <file>qml/pages/CourseListPage.qml</file>
-        <file>qml/pages/CourseDetailPage.qml</file>
-        <file>qml/pages/LiveClassroomPage.qml</file>
-        <file>qml/pages/PlaybackPage.qml</file>
-        <file>qml/pages/HomeworkPage.qml</file>
+        <file alias="qml/main.qml">../qml/main.qml</file>
+        <file alias="qml/theme/Theme.qml">../qml/theme/Theme.qml</file>
+        <file alias="qml/theme/qmldir">../qml/theme/qmldir</file>
+        <file alias="qml/components/Whiteboard.qml">../qml/components/Whiteboard.qml</file>
+        <file alias="qml/components/DanmakuOverlay.qml">../qml/components/DanmakuOverlay.qml</file>
+        <file alias="qml/components/VideoPlayer.qml">../qml/components/VideoPlayer.qml</file>
+        <file alias="qml/components/LiveStreamView.qml">../qml/components/LiveStreamView.qml</file>
+        <file alias="qml/components/HomeworkSubmission.qml">../qml/components/HomeworkSubmission.qml</file>
+        <file alias="qml/pages/LoginPage.qml">../qml/pages/LoginPage.qml</file>
+        <file alias="qml/pages/DashboardPage.qml">../qml/pages/DashboardPage.qml</file>
+        <file alias="qml/pages/CourseListPage.qml">../qml/pages/CourseListPage.qml</file>
+        <file alias="qml/pages/CourseDetailPage.qml">../qml/pages/CourseDetailPage.qml</file>
+        <file alias="qml/pages/LiveClassroomPage.qml">../qml/pages/LiveClassroomPage.qml</file>
+        <file alias="qml/pages/PlaybackPage.qml">../qml/pages/PlaybackPage.qml</file>
+        <file alias="qml/pages/HomeworkPage.qml">../qml/pages/HomeworkPage.qml</file>
+        <file alias="resources/sql/init.sql">sql/init.sql</file>
     </qresource>
 </RCC>

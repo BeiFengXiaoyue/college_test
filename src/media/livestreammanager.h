@@ -5,6 +5,7 @@
 #include <QMediaPlayer>
 #include <QMediaCaptureSession>
 #include <QMediaRecorder>
+#include <QMediaFormat>
 #include <QVideoSink>
 #include <QAudioInput>
 #include <QCamera>

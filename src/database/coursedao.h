@@ -40,8 +40,6 @@ signals:
 
 private:
     QSqlDatabase &m_db;
-
-    UserModel rowToUser(const QSqlQuery &query);
 };
 
 #endif // COURSEDAO_H

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QMediaPlayer>
+#include <QAudioOutput>
 #include <QVideoSink>
 
 class PlaybackManager : public QObject

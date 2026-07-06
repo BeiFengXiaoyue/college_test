@@ -5,6 +5,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QDebug>
+#include <QThreadPool>
 
 ConfigManager::ConfigManager(QObject *parent)
     : QObject(parent)

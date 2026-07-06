@@ -108,18 +108,18 @@ QT += quick quickcontrols2 multimedia multimediawidgets sql concurrent network
 ## 📦 构建指南
 
 ### 前置条件
-- **Qt 6.2+**（推荐 6.5 LTS 或更高）
+- **Qt 6.6+**（当前使用 Qt 6.11.1 编译通过）
 - **Qt Creator** 或命令行工具链
-- C++17 兼容的编译器（MSVC 2022 / GCC 11+ / Clang 14+）
+- C++17 兼容的编译器（MSVC 2022 / MinGW GCC 11+ / Clang 14+）
 
 ### 构建步骤
 
 **方式一：Qt Creator**
 1. 打开 `OnlineEduPlatform.pro`
-2. 配置 Qt 6 kit
+2. 配置 Qt 6 kit（推荐 MinGW 64-bit）
 3. 点击「构建」或按 `Ctrl+R` 运行
 
-**方式二：命令行**
+**方式二：命令行（MinGW）**
 ```bash
 # 进入项目目录
 cd OnlineEduPlatform
@@ -127,18 +127,23 @@ cd OnlineEduPlatform
 # 创建构建目录
 mkdir build && cd build
 
+# 配置 Qt 环境（按实际安装路径调整）
+set PATH=C:\Qt\6.11.1\mingw_64\bin;C:\mingw64\bin;%PATH%
+
 # 生成构建文件
 qmake ../OnlineEduPlatform.pro
 
-# 编译
-nmake          # Windows (MSVC)
-make           # Linux/macOS (GCC/Clang)
-jom            # Windows (Qt JOM, 并行编译)
+# 编译（使用并行编译）
+mingw32-make -j4
+
+# 部署运行时 DLL
+windeployqt release/OnlineEduPlatform.exe
 
 # 运行
-./build/release/OnlineEduPlatform.exe     # Windows
-./build/OnlineEduPlatform                # Linux/macOS
+release/OnlineEduPlatform.exe
 ```
+
+> 💡 **提示**：`windeployqt` 会自动收集程序运行所需的 Qt DLL 和 QML 插件。
 
 ---
 

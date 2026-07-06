@@ -5,8 +5,6 @@ ThreadPoolManager::ThreadPoolManager(QObject *parent)
     : QObject(parent)
     , m_pool(QThreadPool::globalInstance())
 {
-    connect(m_pool, &QThreadPool::activeThreadCountChanged,
-            this, &ThreadPoolManager::activeThreadCountChanged);
 }
 
 ThreadPoolManager::~ThreadPoolManager()

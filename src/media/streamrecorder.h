@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QMediaRecorder>
 #include <QMediaCaptureSession>
+#include <QMediaFormat>
+#include <QMediaPlayer>
+#include <QSize>
 #include <QUrl>
 
 class StreamRecorder : public QObject

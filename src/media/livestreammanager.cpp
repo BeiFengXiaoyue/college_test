@@ -130,12 +130,10 @@ void LiveStreamManager::startPublish(const QString &url, QCamera *camera)
     m_recorder->setMediaFormat(format);
     m_recorder->setOutputLocation(QUrl(url));
 
-    // 查看是否支持推流到网络地址
-    QMediaEncoderSettings encoderSettings;
-    encoderSettings.setVideoResolution(1920, 1080);
-    encoderSettings.setVideoBitRate(2500000);  // 2.5 Mbps
-    encoderSettings.setAudioBitRate(128000);   // 128 kbps
-    m_recorder->setEncoderSettings(encoderSettings);
+    // 编码参数（Qt 6.6+ API）
+    m_recorder->setVideoResolution(QSize(1920, 1080));
+    m_recorder->setVideoBitRate(2500000);   // 2.5 Mbps
+    m_recorder->setAudioBitRate(128000);    // 128 kbps
 
     m_recorder->record();
 

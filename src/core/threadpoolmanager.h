@@ -26,7 +26,10 @@ public:
     // 提交任务
     void start(QRunnable *runnable, int priority = 0);
     template<typename Function>
-    QFuture<typename QtPrivate::ResultOf<Function>::type> run(Function function);
+    auto run(Function function) -> QFuture<std::invoke_result_t<Function>>
+    {
+        return QtConcurrent::run(m_pool, std::forward<Function>(function));
+    }
 
     // 取消所有任务
     void clear();
@@ -40,13 +43,5 @@ signals:
 private:
     QThreadPool *m_pool;
 };
-
-// 模板方法实现 (需要在头文件中)
-template<typename Function>
-QFuture<typename QtPrivate::ResultOf<Function>::type> ThreadPoolManager::run(Function function)
-{
-    auto future = QtConcurrent::run(m_pool, function);
-    return future;
-}
 
 #endif // THREADPOOLMANAGER_H
