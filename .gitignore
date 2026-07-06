@@ -5,6 +5,10 @@
 # 构建目录
 build/
 Build/
+
+# 部署目录（包含 Qt 运行时 DLL，体积巨大）
+dist/
+
 *.pro.user
 *.pro.user.*
 moc_*.cpp
