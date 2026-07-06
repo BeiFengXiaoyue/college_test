@@ -1,5 +1,6 @@
 #include "processmanager.h"
 #include <QProcess>
+#include <QTimer>
 #include <QCoreApplication>
 #include <QDebug>
 
@@ -26,8 +27,10 @@ void ProcessManager::restartApplication()
     qDebug() << "[ProcessManager] New process launched, quitting current instance.";
     emit restartStarted();
 
-    // 退出当前进程
-    QCoreApplication::quit();
+    // 延迟退出，确保 QML pending 事件（界面更新、导航）处理完毕后再退出
+    QTimer::singleShot(0, this, []() {
+        QCoreApplication::quit();
+    });
 }
 
 void ProcessManager::quitApplication()
