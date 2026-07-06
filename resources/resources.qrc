@@ -8,6 +8,7 @@
         <file alias="qml/components/VideoPlayer.qml">../qml/components/VideoPlayer.qml</file>
         <file alias="qml/components/LiveStreamView.qml">../qml/components/LiveStreamView.qml</file>
         <file alias="qml/components/HomeworkSubmission.qml">../qml/components/HomeworkSubmission.qml</file>
+        <file alias="qml/components/qmldir">../qml/components/qmldir</file>
         <file alias="qml/pages/LoginPage.qml">../qml/pages/LoginPage.qml</file>
         <file alias="qml/pages/DashboardPage.qml">../qml/pages/DashboardPage.qml</file>
         <file alias="qml/pages/CourseListPage.qml">../qml/pages/CourseListPage.qml</file>
