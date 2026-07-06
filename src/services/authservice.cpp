@@ -62,7 +62,10 @@ void AuthService::registerUser(const QString &username, const QString &password,
         emit registerSuccess(user.id);
         qDebug() << "[AuthService] User registered:" << user.username;
     } else {
-        emit registerFailed("注册失败，请稍后重试");
+        // 获取 DAO 错误详情（通过 DAO 信号或直接检查数据库）
+        QString dbError = m_dbManager ? m_dbManager->lastError() : "未知错误";
+        qWarning() << "[AuthService] Register failed - DB error:" << dbError;
+        emit registerFailed("注册失败，请稍后再试 [" + dbError + "]");
     }
 }
 
