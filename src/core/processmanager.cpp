@@ -12,15 +12,19 @@ ProcessManager::ProcessManager(QObject *parent)
 void ProcessManager::restartApplication()
 {
     QString appPath = QCoreApplication::applicationFilePath();
-    QStringList args = QCoreApplication::arguments();
+    QString appDir  = QCoreApplication::applicationDirPath();
 
     qDebug() << "[ProcessManager] Restarting application:" << appPath;
+    qDebug() << "[ProcessManager] Working directory:" << appDir;
 
-    // 启动新进程（detached 模式：新进程独立于当前进程生命周期）
-    if (!QProcess::startDetached(appPath, args.mid(1))) {
+    // 启动新进程，显式指定工作目录为 exe 所在目录（确保找到 Qt DLL）
+    bool launched = QProcess::startDetached(appPath, QStringList(), appDir);
+
+    if (!launched) {
         QString errorMsg = "重启应用失败，请手动启动: " + appPath;
         qWarning() << "[ProcessManager]" << errorMsg;
         emit restartFailed(errorMsg);
+        // 重启失败时不退出，让用户继续使用当前实例
         return;
     }
 
@@ -28,7 +32,7 @@ void ProcessManager::restartApplication()
     emit restartStarted();
 
     // 延迟退出，确保 QML pending 事件（界面更新、导航）处理完毕后再退出
-    QTimer::singleShot(0, this, []() {
+    QTimer::singleShot(500, this, []() {
         QCoreApplication::quit();
     });
 }

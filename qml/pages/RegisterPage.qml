@@ -289,7 +289,6 @@ Page {
     Connections {
         target: AuthService
         function onRegisterSuccess(userId) {
-            // 注册成功，C++ 端通过信号-槽自动启动新进程、关闭当前进程
             registerBtn.enabled = false
             registerBtn.text = "注册成功，正在启动..."
             errorText.text = ""
@@ -298,6 +297,19 @@ Page {
             errorText.text = error
             registerBtn.enabled = true
             registerBtn.text = "注 册"
+        }
+    }
+
+    // 重启失败回退处理
+    Connections {
+        target: ProcessManager
+        function onRestartFailed(error) {
+            errorText.text = "注册成功，但自动启动失败，请手动重启应用: " + error
+            registerBtn.enabled = true
+            registerBtn.text = "返回登录"
+            registerBtn.onClicked = function() {
+                mainLoader.setSource("pages/LoginPage.qml")
+            }
         }
     }
 }
