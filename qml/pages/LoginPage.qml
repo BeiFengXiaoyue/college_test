@@ -165,13 +165,32 @@ Page {
             }
 
             // 注册链接
-            Text {
+            Item {
                 Layout.alignment: Qt.AlignHCenter
-                text: "还没有账户？<a href='register'>立即注册</a>"
-                font.pixelSize: Theme.fontSizeSm
-                color: Theme.textSecondary
-                onLinkActivated: {
-                    mainLoader.setSource("pages/RegisterPage.qml")
+                Layout.preferredHeight: linkText.height + 4
+                Layout.fillWidth: true
+
+                Text {
+                    id: linkText
+                    anchors.centerIn: parent
+                    text: "还没有账户？"
+                    font.pixelSize: Theme.fontSizeSm
+                    color: Theme.textSecondary
+                }
+
+                Text {
+                    anchors.left: linkText.right
+                    anchors.verticalCenter: linkText.verticalCenter
+                    anchors.leftMargin: 2
+                    text: "立即注册"
+                    font.pixelSize: Theme.fontSizeSm
+                    color: Theme.primaryColor
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: mainLoader.setSource("pages/RegisterPage.qml")
                 }
             }
         }
